@@ -8,16 +8,28 @@
 
 
 # destroy_all
+City.destroy_all
 Dog.destroy_all
 Dogsitter.destroy_all
 Stroll.destroy_all
+
+
+# city create
+2.times do |i|
+    City.create(
+        name:Faker::Address.city
+    )
+    puts "*"*(i+1)
+    puts "#{i+1} city(ies) created"
+end
 
 
 # dog create
 20.times do |i|
     Dog.create(
         name:Faker::Creature::Dog.name,
-        breed:Faker::Creature::Dog.breed
+        breed:Faker::Creature::Dog.breed,
+        city_id:City.all.sample.id
     )
     puts "*"*(i+1)
     puts "#{i+1} dog(s) created"
@@ -27,7 +39,8 @@ end
 # dogsitter create
 6.times do |i|
     Dogsitter.create(
-        name:Faker::Name.name
+        name:Faker::Name.name,
+        city_id:City.all.sample.id
     )
     puts "*"*(i+1)
     puts "#{i+1} dogsitter(s) created"
